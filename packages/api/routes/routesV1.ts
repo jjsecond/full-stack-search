@@ -1,10 +1,10 @@
 import express from "express";
-import getAllCities from "handlers/getAllCities";
-import getAllCountries from "handlers/getAllCountries";
-import getAllHotels from "handlers/getAllHotels";
+import getHotelsByNameOrLocation from "handlers/getHotelsByNameOrLocation";
+import getCitiesByName from "handlers/getCitiesByName";
+import getCountriesByName from "handlers/getCountriesByName";
 
 export const routerV1 = express.Router();
 
-routerV1.get('/hotels', getAllHotels);
-routerV1.get('/countries', getAllCountries);
-routerV1.get('/cities', getAllCities);
+routerV1.get('/getHotelsByNameOrLocation/:textSearch', getHotelsByNameOrLocation);
+routerV1.get('/getCitiesByName/:name', getCitiesByName);
+routerV1.get('/getCountriesByName/:name', getCountriesByName);
