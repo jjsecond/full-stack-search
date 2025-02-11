@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
-import { COLLECTION_NAMES } from 'lib/constants/collections'
+import { COLLECTION_NAMES, LIMIT_FOR_MULTI_COLLECTIONS } from 'lib/constants/collections'
+import { CityProjectionLimited, CityWithId, CountryProjectionLimited, CountryWithId, HotelProjectionLimited, HotelWithId } from 'lib/types/dbTypes'
 import { MongoClient } from 'mongodb'
 
 const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
@@ -14,32 +15,43 @@ const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
 
     const db = mongoClient.db()
 
-    const [countries, cities, hotels] = await Promise.all([
+    const [countries, cities, hotels]: [CountryProjectionLimited[], CityProjectionLimited[], HotelProjectionLimited[]] = await Promise.all([
       db
-        .collection(COLLECTION_NAMES.COUNTRIES)
+        .collection<CountryWithId>(COLLECTION_NAMES.COUNTRIES)
         .find({
           country: { $regex: partialSearchText }
         })
-        .limit(10)
+        .project<CountryProjectionLimited>({
+            _id: 1,
+            country:1 
+        })
+        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
         .toArray(),
       db
-        .collection(COLLECTION_NAMES.CITIES)
+        .collection<CityWithId>(COLLECTION_NAMES.CITIES)
         .find({
           name: { $regex: partialSearchText }
         })
-        .limit(10)
+        .project<CityProjectionLimited>({
+            _id: 1,
+            name: 1,
+        })
+        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
         .toArray(),
       db
-        .collection(COLLECTION_NAMES.HOTELS)
+        .collection<HotelWithId>(COLLECTION_NAMES.HOTELS)
         .find({
           $or: [
             { hotel_name: { $regex: partialSearchText } },
             { country: { $regex: partialSearchText } }
           ]
+        }).project<HotelProjectionLimited>({
+            _id: 1,
+            hotel_name: 1,
         })
-        .limit(10)
+        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
         .toArray()
-    ])
+    ]);
 
     res.status(200).json({ countries, cities, hotels })
   } catch (error) {
