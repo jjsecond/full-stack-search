@@ -23,5 +23,5 @@ export const countries = [
   { country: 'Taiwan', countryisocode: 'TW' },
   { country: 'Thailand', countryisocode: 'TH' },
   { country: 'United Kingdom', countryisocode: 'GB' },
-  { country: 'United States', countryisocode: 'US' },
-];
+  { country: 'United States', countryisocode: 'US' }
+]
