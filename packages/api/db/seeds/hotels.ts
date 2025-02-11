@@ -9,7 +9,7 @@ export const hotels = [
     state: 'Rayong',
     country: 'Thailand',
     countryisocode: 'TH',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -21,7 +21,7 @@ export const hotels = [
     state: '',
     country: 'Ireland',
     countryisocode: 'IE',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Melia Hotels International',
@@ -33,7 +33,7 @@ export const hotels = [
     state: 'Andalusia',
     country: 'Spain',
     countryisocode: 'ES',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'NH Hotels',
@@ -45,7 +45,7 @@ export const hotels = [
     state: 'Tarapacá',
     country: 'Chile',
     countryisocode: 'CL',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Marriott',
@@ -57,7 +57,7 @@ export const hotels = [
     state: 'Scotland',
     country: 'United Kingdom',
     countryisocode: 'GB',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'HK CTS Hotels',
@@ -69,7 +69,7 @@ export const hotels = [
     state: 'Hong Kong',
     country: 'Hong Kong',
     countryisocode: 'HK',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -81,7 +81,7 @@ export const hotels = [
     state: '',
     country: 'Colombia',
     countryisocode: 'CO',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'No chain',
@@ -93,7 +93,7 @@ export const hotels = [
     state: 'Macao',
     country: 'Macau',
     countryisocode: 'MO',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'Skycity',
@@ -105,7 +105,7 @@ export const hotels = [
     state: 'Auckland',
     country: 'New Zealand',
     countryisocode: 'NZ',
-    star_rating: 4.5,
+    star_rating: 4.5
   },
   {
     chain_name: 'Accor Hotels',
@@ -117,7 +117,7 @@ export const hotels = [
     state: 'Aquitaine',
     country: 'France',
     countryisocode: 'FR',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -129,7 +129,7 @@ export const hotels = [
     state: '',
     country: 'Spain',
     countryisocode: 'ES',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -141,7 +141,7 @@ export const hotels = [
     state: 'Liguria',
     country: 'Italy',
     countryisocode: 'IT',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -153,7 +153,7 @@ export const hotels = [
     state: '',
     country: 'Mexico',
     countryisocode: 'MX',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -165,7 +165,7 @@ export const hotels = [
     state: 'Bolivar',
     country: 'Colombia',
     countryisocode: 'CO',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'No chain',
@@ -177,7 +177,7 @@ export const hotels = [
     state: 'Zhejiang',
     country: 'China',
     countryisocode: 'CN',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Tokyu Hotels',
@@ -189,7 +189,7 @@ export const hotels = [
     state: 'Hyogo',
     country: 'Japan',
     countryisocode: 'JP',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'No chain',
@@ -201,7 +201,7 @@ export const hotels = [
     state: 'Vermont',
     country: 'United States',
     countryisocode: 'US',
-    star_rating: 2.5,
+    star_rating: 2.5
   },
   {
     chain_name: 'No chain',
@@ -213,7 +213,7 @@ export const hotels = [
     state: 'Shanghai',
     country: 'China',
     countryisocode: 'CN',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Hilton Worldwide',
@@ -225,7 +225,7 @@ export const hotels = [
     state: 'Pennsylvania',
     country: 'United States',
     countryisocode: 'US',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'No chain',
@@ -237,7 +237,7 @@ export const hotels = [
     state: "Provence-Alpes-Cote d'Azur",
     country: 'France',
     countryisocode: 'FR',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Caesars Entertainment Corporation',
@@ -249,7 +249,7 @@ export const hotels = [
     state: 'Nevada',
     country: 'United States',
     countryisocode: 'US',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Hoteles Catalonia',
@@ -261,7 +261,7 @@ export const hotels = [
     state: 'Brussels-Capital',
     country: 'Belgium',
     countryisocode: 'BE',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Prince Hotels',
@@ -273,7 +273,7 @@ export const hotels = [
     state: 'Tokyo',
     country: 'Japan',
     countryisocode: 'JP',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -285,7 +285,7 @@ export const hotels = [
     state: 'Kyoto',
     country: 'Japan',
     countryisocode: 'JP',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Thistle & Guoman',
@@ -297,7 +297,7 @@ export const hotels = [
     state: 'London, England',
     country: 'United Kingdom',
     countryisocode: 'GB',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -309,7 +309,7 @@ export const hotels = [
     state: 'Hong Kong',
     country: 'Hong Kong',
     countryisocode: 'HK',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Leading Hotels of the World',
@@ -321,7 +321,7 @@ export const hotels = [
     state: '',
     country: 'Italy',
     countryisocode: 'IT',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'Park Hotels',
@@ -333,7 +333,7 @@ export const hotels = [
     state: 'Andhra Pradesh',
     country: 'India',
     countryisocode: 'IN',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'InterContinental Hotels Group',
@@ -345,7 +345,7 @@ export const hotels = [
     state: 'Texas',
     country: 'United States',
     countryisocode: 'US',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Sotetsu Fresa Inn',
@@ -357,7 +357,7 @@ export const hotels = [
     state: 'Nara',
     country: 'Japan',
     countryisocode: 'JP',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Thistle & Guoman',
@@ -369,7 +369,7 @@ export const hotels = [
     state: 'London, England',
     country: 'United Kingdom',
     countryisocode: 'GB',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -381,7 +381,7 @@ export const hotels = [
     state: 'Delhi National Territory',
     country: 'India',
     countryisocode: 'IN',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'Corinthia Hotels International',
@@ -393,7 +393,7 @@ export const hotels = [
     state: 'Malta',
     country: 'Malta',
     countryisocode: 'MT',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'Blue Sea Hotels & Resorts',
@@ -405,7 +405,7 @@ export const hotels = [
     state: 'Andalusia',
     country: 'Spain',
     countryisocode: 'ES',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'InterContinental Hotels Group',
@@ -417,7 +417,7 @@ export const hotels = [
     state: 'Valle del Cauca',
     country: 'Colombia',
     countryisocode: 'CO',
-    star_rating: 4.5,
+    star_rating: 4.5
   },
   {
     chain_name: 'Oberoi Hotels & Resorts',
@@ -429,7 +429,7 @@ export const hotels = [
     state: 'Rajasthan',
     country: 'India',
     countryisocode: 'IN',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'No chain',
@@ -441,7 +441,7 @@ export const hotels = [
     state: '',
     country: 'Peru',
     countryisocode: 'PE',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'No chain',
@@ -453,7 +453,7 @@ export const hotels = [
     state: 'Al Bahr al Ahmar',
     country: 'Egypt',
     countryisocode: 'EG',
-    star_rating: 3,
+    star_rating: 3
   },
   {
     chain_name: 'Daiwa Royal Hotel',
@@ -465,7 +465,7 @@ export const hotels = [
     state: 'Fukuoka',
     country: 'Japan',
     countryisocode: 'JP',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -477,7 +477,7 @@ export const hotels = [
     state: 'Lazio',
     country: 'Italy',
     countryisocode: 'IT',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -489,7 +489,7 @@ export const hotels = [
     state: 'Madrid',
     country: 'Spain',
     countryisocode: 'ES',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: '',
@@ -501,7 +501,7 @@ export const hotels = [
     state: 'Mombasa',
     country: 'Kenya',
     countryisocode: 'KE',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'No chain',
@@ -513,7 +513,7 @@ export const hotels = [
     state: '',
     country: 'Finland',
     countryisocode: 'FI',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'No chain',
@@ -525,7 +525,7 @@ export const hotels = [
     state: '',
     country: 'Germany',
     countryisocode: 'DE',
-    star_rating: 4,
+    star_rating: 4
   },
   {
     chain_name: 'Marriott',
@@ -537,7 +537,7 @@ export const hotels = [
     state: 'Taipei City',
     country: 'Taiwan',
     countryisocode: 'TW',
-    star_rating: 5,
+    star_rating: 5
   },
   {
     chain_name: 'InterContinental Hotels Group',
@@ -549,7 +549,7 @@ export const hotels = [
     state: 'London, England',
     country: 'United Kingdom',
     countryisocode: 'GB',
-    star_rating: 3.5,
+    star_rating: 3.5
   },
   {
     chain_name: 'No chain',
@@ -561,6 +561,6 @@ export const hotels = [
     state: '',
     country: 'Bulgaria',
     countryisocode: 'BG',
-    star_rating: 4,
-  },
-];
+    star_rating: 4
+  }
+]
