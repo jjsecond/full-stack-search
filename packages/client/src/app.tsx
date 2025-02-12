@@ -1,37 +1,77 @@
 import { useState, type ChangeEvent } from 'react';
-import { getCodeSandboxHost } from "@codesandbox/utils";
+import { getCodeSandboxHost } from '@codesandbox/utils';
+import { CityWithId, CountryWithId, HotelWithId } from './lib/types/dbTypes';
+import HotelResultsDropdown from './lib/components/hotelResultsDropdown/hotelResultsDropdown';
+import CountryResultsDropdown from './lib/components/countryResultsDropdown/countryResultsDropdown';
+import CityResultsDropdown from './lib/components/cityResultsDropdown/cityResultsDropdown';
+import { API_ENDPOINTS_V1 } from './lib/constants/apiEndpoints';
 
-type Hotel = { _id: string, chain_name: string; hotel_name: string; city: string, country: string };
+const codeSandboxHost = getCodeSandboxHost(3001);
+const API_URL = codeSandboxHost
+  ? `https://${codeSandboxHost}`
+  : 'http://localhost:3001';
 
-const codeSandboxHost = getCodeSandboxHost(3001)
-const API_URL = codeSandboxHost ? `https://${codeSandboxHost}` : 'http://localhost:3001'
+// const fetchAndFilterHotels = async (value: string) => {
+//   const hotelsData = await fetch(`${API_URL}/v1/hotels-cities-countries/${value}`);
+//   const hotels = (await hotelsData.json()) as Hotel[];
 
-const fetchAndFilterHotels = async (value: string) => {
-  const hotelsData = await fetch(`${API_URL}/hotels`);
-  const hotels = (await hotelsData.json()) as Hotel[];
-  return hotels.filter(
-    ({ chain_name, hotel_name, city, country }) =>
-      chain_name.toLowerCase().includes(value.toLowerCase()) ||
-      hotel_name.toLowerCase().includes(value.toLowerCase()) ||
-      city.toLowerCase().includes(value.toLowerCase()) ||
-      country.toLowerCase().includes(value.toLowerCase())
-  );
-}
+//   console.log(hotels)
+//   return hotels
+// return hotels.hotels.filter(
+//   ({ chain_name, hotel_name, city, country }) =>
+//     chain_name.toLowerCase().includes(value.toLowerCase()) ||
+//     hotel_name.toLowerCase().includes(value.toLowerCase()) ||
+//     city.toLowerCase().includes(value.toLowerCase()) ||
+//     country.toLowerCase().includes(value.toLowerCase())
+// );
+// };
+const initialHotelsCitiesCountriesState = {
+  hotels: [],
+  countries: [],
+  cities: [],
+};
+
+const fetchHotelsCitiesCountries = async (value: string) => {
+  try {
+    const response = await fetch(
+      `${API_URL}${API_ENDPOINTS_V1.HOTELS_COUNTRIES_CITIES}/${value}`,
+    );
+
+    // TODO: considering adding an error message here for user
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching data hotels, countries and cities: ', error);
+    return initialHotelsCitiesCountriesState;
+  }
+};
 
 function App() {
-  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [hotelsCitiesCountries, setHotelsCitiesCountries] = useState<{
+    hotels: HotelWithId[];
+    countries: CountryWithId[];
+    cities: CityWithId[];
+  }>({
+    hotels: [],
+    countries: [],
+    cities: [],
+  });
+
   const [showClearBtn, setShowClearBtn] = useState(false);
 
   const fetchData = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === '') {
-      setHotels([]);
+      setHotelsCitiesCountries(initialHotelsCitiesCountriesState);
       setShowClearBtn(false);
       return;
     }
 
-    const filteredHotels = await fetchAndFilterHotels(event.target.value)
+    const data = await fetchHotelsCitiesCountries(event.target.value);
     setShowClearBtn(true);
-    setHotels(filteredHotels);
+    setHotelsCitiesCountries(data);
   };
 
   return (
@@ -54,22 +94,16 @@ function App() {
                   </span>
                 )}
               </div>
-              {!!hotels.length && (
+              {!!hotelsCitiesCountries.hotels.length && (
                 <div className="search-dropdown-menu dropdown-menu w-100 show p-2">
                   <h2>Hotels</h2>
-                  {hotels.length ? hotels.map((hotel, index) => (
-                    <li key={index}>
-                      <a href={`/hotels/${hotel._id}`} className="dropdown-item">
-                        <i className="fa fa-building mr-2"></i>
-                        {hotel.hotel_name}
-                      </a>
-                      <hr className="divider" />
-                    </li>
-                  )) : <p>No hotels matched</p>}
+                  <HotelResultsDropdown hotels={hotelsCitiesCountries.hotels} />
                   <h2>Countries</h2>
-                  <p>No countries matched</p>
+                  <CountryResultsDropdown
+                    countries={hotelsCitiesCountries.countries}
+                  />
                   <h2>Cities</h2>
-                  <p>No cities matched</p>
+                  <CityResultsDropdown cities={hotelsCitiesCountries.cities} />
                 </div>
               )}
             </div>
