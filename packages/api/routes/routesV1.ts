@@ -1,19 +1,13 @@
 import express from 'express';
-import getHotelsByNameOrLocation from 'handlers/getHotelsByNameOrLocation';
-import getCitiesByName from 'handlers/getCitiesByName';
-import getCountriesByName from 'handlers/getCountriesByName';
 import getHotelsCitiesCountriesByText from 'handlers/getHotelsCitiesCountriesByText';
+import getCityById from 'handlers/getCityById';
+import getCountryById from 'handlers/getCountryById';
+import getHotelById from 'handlers/getHotelById';
 
 export const routerV1 = express.Router();
 
-routerV1.get(
-  '/getHotelsByNameOrLocation/:textSearch',
-  getHotelsByNameOrLocation,
-);
-routerV1.get('/getCitiesByName/:name', getCitiesByName);
-routerV1.get('/getCountriesByName/:name', getCountriesByName);
+routerV1.get('/hotel/:id', getHotelById);
+routerV1.get('/city/:id', getCityById);
+routerV1.get('/country/:id', getCountryById);
 
-routerV1.get(
-  '/getHotelsCitiesCountriesByText/:textSearch',
-  getHotelsCitiesCountriesByText,
-);
+routerV1.get('/hotels-cities-countries/:text', getHotelsCitiesCountriesByText);

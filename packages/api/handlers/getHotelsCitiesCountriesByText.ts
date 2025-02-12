@@ -1,8 +1,8 @@
 import dbConnection from 'db/dbConnection/dbConnection';
 import { Request, Response } from 'express';
-import searchCitiesByPartialName from 'lib/functions/searchCitiesByPartialName';
-import searchCountriesByPartialCountry from 'lib/functions/searchCountriesByPartialCountry';
-import searchHotelsByPartialNameOrCountry from 'lib/functions/searchHotelsByPartialNameOrCountry';
+import searchCitiesByPartialName from 'lib/helperFunctions/searchCitiesByPartialName';
+import searchCountriesByPartialCountry from 'lib/helperFunctions/searchCountriesByPartialCountry';
+import searchHotelsByPartialNameOrCountry from 'lib/helperFunctions/searchHotelsByPartialNameOrCountry';
 import {
   CityProjectionLimited,
   CountryProjectionLimited,
@@ -11,10 +11,10 @@ import {
 
 const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
   try {
-    const { textSearch } = req.params;
+    const { text } = req.params;
 
     // TODO: consider index with lowercase
-    const partialSearchText = new RegExp(textSearch, 'i');
+    const partialSearchText = new RegExp(text, 'i');
 
     const db = await dbConnection();
 
