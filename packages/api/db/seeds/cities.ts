@@ -42,5 +42,5 @@ export const cities = [
   { name: 'Taxco' },
   { name: 'Tokyo' },
   { name: 'Torremolinos' },
-  { name: 'Visakhapatnam' }
-]
+  { name: 'Visakhapatnam' },
+];
