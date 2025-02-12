@@ -2,7 +2,7 @@ import { useState, type ChangeEvent } from 'react';
 import { HotelsCountriesCities } from './lib/types/state';
 import LocationResultsDropDown from './lib/components/locationResultsDropDown/locationResultsDropDown';
 import { initialLocationsState } from './lib/constants/initialStates';
-import { fetchLocations } from './lib/api/fetchLoactions';
+import { fetchLocations } from './lib/api/fetchLocations';
 
 // const fetchAndFilterHotels = async (value: string) => {
 //   const hotelsData = await fetch(`${API_URL}/v1/hotels-cities-countries/${value}`);
