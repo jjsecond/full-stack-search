@@ -1,38 +1,38 @@
-import { Request, Response } from 'express'
-import { COLLECTION_NAMES } from 'lib/constants/collections'
-import { MongoClient } from 'mongodb'
+import { Request, Response } from 'express';
+import { COLLECTION_NAMES } from 'lib/constants/collections';
+import { MongoClient } from 'mongodb';
 
 const getHotelsByNameOrLocation = async (req: Request, res: Response) => {
   // TODO: Sort out type on url
-  const mongoClient = new MongoClient(process.env.DATABASE_URL || '')
+  const mongoClient = new MongoClient(process.env.DATABASE_URL || '');
 
   // TODO: Check that it is valid
-  const { textSearch } = req.params
+  const { textSearch } = req.params;
 
   try {
-    await mongoClient.connect()
-    console.log('Successfully connected to MongoDB!')
+    await mongoClient.connect();
+    console.log('Successfully connected to MongoDB!');
 
-    const hotelName = new RegExp(textSearch, 'i')
-    const hotelLocation = new RegExp(textSearch, 'i')
+    const hotelName = new RegExp(textSearch, 'i');
+    const hotelLocation = new RegExp(textSearch, 'i');
 
-    const db = mongoClient.db()
-    const collection = db.collection(COLLECTION_NAMES.HOTELS)
+    const db = mongoClient.db();
+    const collection = db.collection(COLLECTION_NAMES.HOTELS);
 
     const result = await collection
       .find({
         $or: [
           { hotel_name: { $regex: hotelName } },
-          { country: { $regex: hotelLocation } }
-        ]
+          { country: { $regex: hotelLocation } },
+        ],
       })
       .limit(10)
-      .toArray()
+      .toArray();
 
-    res.status(200).json(result)
+    res.status(200).json(result);
   } finally {
-    await mongoClient.close()
+    await mongoClient.close();
   }
-}
+};
 
-export default getHotelsByNameOrLocation
+export default getHotelsByNameOrLocation;
