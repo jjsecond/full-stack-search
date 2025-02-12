@@ -1,15 +1,8 @@
 import { useState, type ChangeEvent } from 'react';
-import { getCodeSandboxHost } from '@codesandbox/utils';
-import { CityWithId, CountryWithId, HotelWithId } from './lib/types/dbTypes';
-import HotelResultsDropdown from './lib/components/hotelResultsDropdown/hotelResultsDropdown';
-import CountryResultsDropdown from './lib/components/countryResultsDropdown/countryResultsDropdown';
-import CityResultsDropdown from './lib/components/cityResultsDropdown/cityResultsDropdown';
-import { API_ENDPOINTS_V1 } from './lib/constants/apiEndpoints';
-
-const codeSandboxHost = getCodeSandboxHost(3001);
-const API_URL = codeSandboxHost
-  ? `https://${codeSandboxHost}`
-  : 'http://localhost:3001';
+import { HotelsCountriesCities } from './lib/types/state';
+import LocationResultsDropDown from './lib/components/locationResultsDropDown/locationResultsDropDown';
+import { initialLocationsState } from './lib/constants/initialStates';
+import { fetchLocations } from './lib/api/fetchLoactions';
 
 // const fetchAndFilterHotels = async (value: string) => {
 //   const hotelsData = await fetch(`${API_URL}/v1/hotels-cities-countries/${value}`);
@@ -25,53 +18,23 @@ const API_URL = codeSandboxHost
 //     country.toLowerCase().includes(value.toLowerCase())
 // );
 // };
-const initialHotelsCitiesCountriesState = {
-  hotels: [],
-  countries: [],
-  cities: [],
-};
-
-const fetchHotelsCitiesCountries = async (value: string) => {
-  try {
-    const response = await fetch(
-      `${API_URL}${API_ENDPOINTS_V1.HOTELS_COUNTRIES_CITIES}/${value}`,
-    );
-
-    // TODO: considering adding an error message here for user
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching data hotels, countries and cities: ', error);
-    return initialHotelsCitiesCountriesState;
-  }
-};
 
 function App() {
-  const [hotelsCitiesCountries, setHotelsCitiesCountries] = useState<{
-    hotels: HotelWithId[];
-    countries: CountryWithId[];
-    cities: CityWithId[];
-  }>({
-    hotels: [],
-    countries: [],
-    cities: [],
-  });
-
+  const [locations, setLocations] = useState<HotelsCountriesCities>(
+    initialLocationsState,
+  );
   const [showClearBtn, setShowClearBtn] = useState(false);
 
   const fetchData = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === '') {
-      setHotelsCitiesCountries(initialHotelsCitiesCountriesState);
+      setLocations(initialLocationsState);
       setShowClearBtn(false);
       return;
     }
 
-    const data = await fetchHotelsCitiesCountries(event.target.value);
+    const data = await fetchLocations(event.target.value);
     setShowClearBtn(true);
-    setHotelsCitiesCountries(data);
+    setLocations(data);
   };
 
   return (
@@ -94,18 +57,7 @@ function App() {
                   </span>
                 )}
               </div>
-              {!!hotelsCitiesCountries.hotels.length && (
-                <div className="search-dropdown-menu dropdown-menu w-100 show p-2">
-                  <h2>Hotels</h2>
-                  <HotelResultsDropdown hotels={hotelsCitiesCountries.hotels} />
-                  <h2>Countries</h2>
-                  <CountryResultsDropdown
-                    countries={hotelsCitiesCountries.countries}
-                  />
-                  <h2>Cities</h2>
-                  <CityResultsDropdown cities={hotelsCitiesCountries.cities} />
-                </div>
-              )}
+              <LocationResultsDropDown locations={locations} />
             </div>
           </div>
         </div>
