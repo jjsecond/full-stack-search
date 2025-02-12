@@ -1,6 +1,12 @@
 import { Request, Response } from 'express'
-import { COLLECTION_NAMES, LIMIT_FOR_MULTI_COLLECTIONS } from 'lib/constants/collections'
-import { CityProjectionLimited, CityWithId, CountryProjectionLimited, CountryWithId, HotelProjectionLimited, HotelWithId } from 'lib/types/dbTypes'
+import searchCitiesByPartialName from 'lib/functions/searchCitiesByPartialName'
+import searchCountriesByPartialCountry from 'lib/functions/searchCountriesByPartialCountry'
+import searchHotelsByPartialNameOrCountry from 'lib/functions/searchHotelsByPartialNameOrCountry'
+import {
+  CityProjectionLimited,
+  CountryProjectionLimited,
+  HotelProjectionLimited
+} from 'lib/types/dbTypes'
 import { MongoClient } from 'mongodb'
 
 const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
@@ -15,43 +21,15 @@ const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
 
     const db = mongoClient.db()
 
-    const [countries, cities, hotels]: [CountryProjectionLimited[], CityProjectionLimited[], HotelProjectionLimited[]] = await Promise.all([
-      db
-        .collection<CountryWithId>(COLLECTION_NAMES.COUNTRIES)
-        .find({
-          country: { $regex: partialSearchText }
-        })
-        .project<CountryProjectionLimited>({
-            _id: 1,
-            country:1 
-        })
-        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
-        .toArray(),
-      db
-        .collection<CityWithId>(COLLECTION_NAMES.CITIES)
-        .find({
-          name: { $regex: partialSearchText }
-        })
-        .project<CityProjectionLimited>({
-            _id: 1,
-            name: 1,
-        })
-        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
-        .toArray(),
-      db
-        .collection<HotelWithId>(COLLECTION_NAMES.HOTELS)
-        .find({
-          $or: [
-            { hotel_name: { $regex: partialSearchText } },
-            { country: { $regex: partialSearchText } }
-          ]
-        }).project<HotelProjectionLimited>({
-            _id: 1,
-            hotel_name: 1,
-        })
-        .limit(LIMIT_FOR_MULTI_COLLECTIONS)
-        .toArray()
-    ]);
+    const [countries, cities, hotels]: [
+      CountryProjectionLimited[],
+      CityProjectionLimited[],
+      HotelProjectionLimited[]
+    ] = await Promise.all([
+      searchCountriesByPartialCountry(db, partialSearchText, 10),
+      searchCitiesByPartialName(db, partialSearchText, 10),
+      searchHotelsByPartialNameOrCountry(db, partialSearchText, 10)
+    ])
 
     res.status(200).json({ countries, cities, hotels })
   } catch (error) {
