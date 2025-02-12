@@ -1,40 +1,42 @@
-import { useState, type ChangeEvent } from 'react';
+import { useRef, useState, type ChangeEvent } from 'react';
 import { HotelsCountriesCities } from './lib/types/state';
 import LocationResultsDropDown from './lib/components/locationResultsDropDown/locationResultsDropDown';
 import { initialLocationsState } from './lib/constants/initialStates';
 import { fetchLocations } from './lib/api/fetchLocations';
 
-// const fetchAndFilterHotels = async (value: string) => {
-//   const hotelsData = await fetch(`${API_URL}/v1/hotels-cities-countries/${value}`);
-//   const hotels = (await hotelsData.json()) as Hotel[];
-
-//   console.log(hotels)
-//   return hotels
-// return hotels.hotels.filter(
+// TODO: consider moving the filtering and checking to the api
 //   ({ chain_name, hotel_name, city, country }) =>
 //     chain_name.toLowerCase().includes(value.toLowerCase()) ||
 //     hotel_name.toLowerCase().includes(value.toLowerCase()) ||
 //     city.toLowerCase().includes(value.toLowerCase()) ||
 //     country.toLowerCase().includes(value.toLowerCase())
-// );
-// };
 
 function App() {
   const [locations, setLocations] = useState<HotelsCountriesCities>(
     initialLocationsState,
   );
-  const [showClearBtn, setShowClearBtn] = useState(false);
+  const [searchBarHasText, setSearchBarHasText] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const fetchData = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === '') {
       setLocations(initialLocationsState);
-      setShowClearBtn(false);
+      setSearchBarHasText(false);
       return;
     }
 
     const data = await fetchLocations(event.target.value);
-    setShowClearBtn(true);
+    setSearchBarHasText(true);
     setLocations(data);
+  };
+
+  const clearSearchBar = () => {
+    setLocations(initialLocationsState);
+    setSearchBarHasText(false);
+
+    if (searchInputRef.current) {
+      searchInputRef.current.value = '';
+    }
   };
 
   return (
@@ -50,14 +52,18 @@ function App() {
                   className="form-control form-input"
                   placeholder="Search accommodation..."
                   onChange={fetchData}
+                  ref={searchInputRef}
                 />
-                {showClearBtn && (
-                  <span className="left-pan">
+                {searchBarHasText && (
+                  <span className="left-pan" onClick={clearSearchBar}>
                     <i className="fa fa-close"></i>
                   </span>
                 )}
               </div>
-              <LocationResultsDropDown locations={locations} />
+              <LocationResultsDropDown
+                locations={locations}
+                searchBarHasText={searchBarHasText}
+              />
             </div>
           </div>
         </div>
