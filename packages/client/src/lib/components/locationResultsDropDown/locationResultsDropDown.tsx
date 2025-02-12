@@ -7,14 +7,16 @@ import HotelResultsDropdown from '../hotelResultsDropdown/hotelResultsDropdown';
 
 export type LocationResultsDropDownProps = {
   locations: HotelsCountriesCities;
+  searchBarHasText: boolean;
 };
 
 const LocationResultsDropDown: React.FC<LocationResultsDropDownProps> = ({
   locations,
+  searchBarHasText,
 }) => {
   return (
     <>
-      {!!locations && (
+      {searchBarHasText && (
         <div className="search-dropdown-menu dropdown-menu w-100 show p-2">
           <h2>Hotels</h2>
           <HotelResultsDropdown hotels={locations.hotels} />
