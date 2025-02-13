@@ -10,6 +10,7 @@ export type LocationResultsDropDownProps = {
   searchBarHasText: boolean;
 };
 
+// TODO: Could make the ResultsDropDown into a single reusable component
 const LocationResultsDropDown: React.FC<LocationResultsDropDownProps> = ({
   locations,
   searchBarHasText,
