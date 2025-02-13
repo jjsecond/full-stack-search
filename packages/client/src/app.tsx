@@ -3,6 +3,7 @@ import { HotelsCountriesCities } from './lib/types/state';
 import LocationResultsDropDown from './lib/components/locationResultsDropDown/locationResultsDropDown';
 import { initialLocationsState } from './lib/constants/initialStates';
 import { fetchLocations } from './lib/api/fetchLocations';
+import { useLocation } from 'react-router-dom';
 
 // TODO: consider moving the filtering and checking to the api
 //   ({ chain_name, hotel_name, city, country }) =>
@@ -17,6 +18,7 @@ function App() {
   );
   const [searchBarHasText, setSearchBarHasText] = useState(false);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     setLocations(initialLocationsState);
@@ -24,7 +26,7 @@ function App() {
     if (searchInputRef.current) {
       searchInputRef.current.value = '';
     }
-  }, []);
+  }, [location]);
 
   const fetchData = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === '') {
