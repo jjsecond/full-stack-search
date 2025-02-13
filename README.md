@@ -88,9 +88,32 @@ For larger or more time-intensive changes, you're welcome to outline your ideas 
 
 ### Write-up
 
-<!-- Write-up/conclusion section -->
+### MongoDB and Api Performance
 
-_When all the behaviour is implemented, feel free to add some observations or conclusions you like to share in the section_
+To make the query for the hotels, cities and countries performant I opted to combine them on the api side. 
+
+I could have made three independent calls to fetch data, but that would require multiple requests from the client, increasing complexity in handling different endpoints, potential performance impacts, and additional error handling.
+
+While this approach isn’t strictly RESTful, it reduces the workload on the client—whether web or mobile—and should be more efficient overall with less logic for a client/consumer to implement.
+
+For partial searches, I opted for a regex search on the collections. I chose not to index these fields since indexing offers little benefit for regex-based searches. Additionally, I used projections to ensure that only the necessary data is sent to the client, reducing memory usage on the API side and preventing MongoDB from loading unnecessary data.
+
+To further optimize performance, I applied a limit of 5 results. This not only keeps the response neater on the frontend but also prevents MongoDB from retrieving more documents than necessary so should improve performance.
+
+On the frontend, there was logic to validate fields, but I didn’t have time to refactor this. Ideally, I would move this validation to middleware on the API. This would ensure proper request handling, with any errors logged for further inspection.
+
+#### Other Technologies and Solutions Considered
+
+I acknowledge that regex searches in MongoDB are not the most performant solution. In the future, I would consider integrating Elasticsearch or MongoDB Atlas with N-grams for improved efficiency.
+
+#### Possible Improvements
+
+An alternative, if sticking solely with MongoDB, would be to refine the search by first filtering by country, then city, before querying hotels. Indexing country and city names (or codes) on the hotel collection could significantly reduce the dataset size, improving overall query performance. 
+
+Depends on the requirements though.
+
+
+
 
 ### Database structure
 
