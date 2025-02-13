@@ -90,6 +90,13 @@ For larger or more time-intensive changes, you're welcome to outline your ideas 
 
 ### MongoDB and Api Performance
 
+#### Overview of Performance:
+
+- one endpoint for three collections
+- regex for partial search
+- projections
+- limit of 5 documents
+
 To make the query for the hotels, cities and countries performant I opted to combine them on the api side. 
 
 I could have made three independent calls to fetch data, but that would require multiple requests from the client, increasing complexity in handling different endpoints, potential performance impacts, and additional error handling.
@@ -100,18 +107,40 @@ For partial searches, I opted for a regex search on the collections. I chose not
 
 To further optimize performance, I applied a limit of 5 results. This not only keeps the response neater on the frontend but also prevents MongoDB from retrieving more documents than necessary so should improve performance.
 
-On the frontend, there was logic to validate fields, but I didn’t have time to refactor this. Ideally, I would move this validation to middleware on the API. This would ensure proper request handling, with any errors logged for further inspection.
 
 #### Other Technologies and Solutions Considered
 
 I acknowledge that regex searches in MongoDB are not the most performant solution. In the future, I would consider integrating Elasticsearch or MongoDB Atlas with N-grams for improved efficiency.
 
-#### Possible Improvements
+#### Possible Performance Improvements
 
-An alternative, if sticking solely with MongoDB, would be to refine the search by first filtering by country, then city, before querying hotels. Indexing country and city names (or codes) on the hotel collection could significantly reduce the dataset size, improving overall query performance. 
+An alternative, if sticking solely with MongoDB, would be to refine the search by first filtering by country, then city, before querying hotels. Indexing country and city names (or codes) on the hotel collection could significantly reduce the dataset size, improving overall query performance - depends on the requirements though.
 
-Depends on the requirements though.
+On the frontend, there was logic to validate fields, but I didn’t have time to refactor this. Ideally, I would move this validation to middleware on the API. This would ensure proper request handling, with any errors logged for further inspection.
 
+Countries and Cities collection are unlikely to change once they are in so a  cache could improve performance here aswell.
+
+A cache on the _id for each document could also improve the hotel, country and city performance.
+
+#### Additions
+
+##### Api
+- routes
+- api versioning
+- linting and prettier
+
+##### Frontend
+- react router
+- semantic elements
+- prettier
+
+##### Further Improvements
+
+- api documentation like Swagger
+- testing
+- refactor more code for maintainability
+- caching
+- use aria labels for accessibility
 
 
 
