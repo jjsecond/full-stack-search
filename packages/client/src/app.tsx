@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { HotelsCountriesCities } from './lib/types/state';
 import LocationResultsDropDown from './lib/components/locationResultsDropDown/locationResultsDropDown';
 import { initialLocationsState } from './lib/constants/initialStates';
@@ -17,6 +17,14 @@ function App() {
   );
   const [searchBarHasText, setSearchBarHasText] = useState(false);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setLocations(initialLocationsState);
+    setSearchBarHasText(false);
+    if (searchInputRef.current) {
+      searchInputRef.current.value = '';
+    }
+  }, []);
 
   const fetchData = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === '') {
