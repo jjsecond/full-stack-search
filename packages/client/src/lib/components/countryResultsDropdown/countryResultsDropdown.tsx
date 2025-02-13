@@ -8,12 +8,12 @@ const CountryResultsDropdown: React.FC<CountryResultsDropdownProps> = ({
   countries,
 }) => {
   return (
-    <ol>
+    <ul className="list-unstyled">
       {countries.length ? (
         countries.map((country) => (
           <li key={country._id}>
             <a href={`/country/${country._id}`} className="dropdown-item">
-              <i className="fa fa-building mr-2"></i>
+              <i className="fa fa-map-pin mr-2"></i>
               {country.country}
             </a>
             <hr className="divider" />
@@ -22,7 +22,7 @@ const CountryResultsDropdown: React.FC<CountryResultsDropdownProps> = ({
       ) : (
         <p>No countries matched</p>
       )}
-    </ol>
+    </ul>
   );
 };
 
