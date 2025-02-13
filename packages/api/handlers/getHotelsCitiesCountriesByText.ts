@@ -1,5 +1,6 @@
 import dbConnection from 'db/dbConnection/dbConnection';
 import { Request, Response } from 'express';
+import { LIMIT_FOR_MULTI_COLLECTIONS } from 'lib/constants/collections';
 import searchCitiesByPartialName from 'lib/helperFunctions/searchCitiesByPartialName';
 import searchCountriesByPartialCountry from 'lib/helperFunctions/searchCountriesByPartialCountry';
 import searchHotelsByPartialNameOrCountry from 'lib/helperFunctions/searchHotelsByPartialNameOrCountry';
@@ -18,14 +19,16 @@ const getHotelsCitiesCountriesByText = async (req: Request, res: Response) => {
 
     const db = await dbConnection();
 
+    const limit = LIMIT_FOR_MULTI_COLLECTIONS;
+
     const [countries, cities, hotels]: [
       CountryProjectionLimited[],
       CityProjectionLimited[],
       HotelProjectionLimited[],
     ] = await Promise.all([
-      searchCountriesByPartialCountry(db, partialSearchText, 10),
-      searchCitiesByPartialName(db, partialSearchText, 10),
-      searchHotelsByPartialNameOrCountry(db, partialSearchText, 10),
+      searchCountriesByPartialCountry(db, partialSearchText, limit),
+      searchCitiesByPartialName(db, partialSearchText, limit),
+      searchHotelsByPartialNameOrCountry(db, partialSearchText, limit),
     ]);
 
     res.status(200).json({ countries, cities, hotels });

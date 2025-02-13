@@ -5,7 +5,7 @@ import { Db } from 'mongodb';
 const searchCitiesByPartialName = (
   db: Db,
   partialSearchText: RegExp,
-  limit: 10,
+  limit: number,
 ) => {
   return db
     .collection<CityWithId>(COLLECTION_NAMES.CITIES)
