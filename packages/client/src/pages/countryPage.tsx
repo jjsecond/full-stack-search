@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { CountryWithId } from '../lib/types/dbTypes';
 import { API_ENDPOINTS_V1 } from '../lib/constants/apiEndpoints';
-import fetchDBDocument from '../lib/api/fetchDDDocument';
+import fetchDBDocument from '../lib/api/fetchDBDocument';
 import LoadingData from '../lib/components/common/loadingData';
 
 const CountryPage = () => {
