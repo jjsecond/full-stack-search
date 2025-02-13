@@ -8,7 +8,7 @@ const HotelResultsDropdown: React.FC<HotelResultsDropdownProps> = ({
   hotels,
 }) => {
   return (
-    <ol>
+    <ul className="list-unstyled">
       {hotels.length ? (
         hotels.map((hotel) => (
           <li key={hotel._id}>
@@ -22,7 +22,7 @@ const HotelResultsDropdown: React.FC<HotelResultsDropdownProps> = ({
       ) : (
         <p>No hotels matched</p>
       )}
-    </ol>
+    </ul>
   );
 };
 
